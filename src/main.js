@@ -1,13 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import AppLayout from "./layout/AppLayout/AppLayout";
 
 const App = () => {
-  return (
-    <div>
-      <h1>Welcome to Your Custom New Tab with React!</h1>
-      <p>This is a React component rendered in the new tab.</p>
-    </div>
-  );
+  return <AppLayout />;
 };
 
 // New way (React 18)
