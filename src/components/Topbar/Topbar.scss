@@ -1,0 +1,17 @@
+.topbar-container {
+  height: 65px;
+  position: fixed;
+  top: 0;
+  left: 115px;
+  padding: 24px 32px;
+
+  &-date {
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 700;
+    span {
+      font-weight: 500;
+    }
+  }
+}

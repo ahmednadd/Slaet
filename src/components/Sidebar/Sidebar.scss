@@ -1,0 +1,55 @@
+.sidebar-container {
+  width: 115px;
+  height: 100%;
+  background: #f7f7f7;
+  position: relative;
+  padding-top: 96px;
+  &-icon {
+    top: 28px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &-list {
+    padding-top: 22px;
+    position: relative;
+    &-item {
+      min-height: 65px;
+      color: #606060;
+      font-family: Inter;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative; // Add this
+      z-index: 1;
+
+      &.active {
+        color: #000;
+      }
+    }
+    .active-background {
+      position: absolute;
+      left: 14px;
+      width: 100px;
+      height: 65px;
+      border-radius: 12px 0px 0px 12px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      background: #fff;
+      transition: top 0.2s cubic-bezier(0.71, 0.01, 0.38, 1);
+    }
+  }
+}
+
+@keyframes slideVertical {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(50%);
+  }
+}
