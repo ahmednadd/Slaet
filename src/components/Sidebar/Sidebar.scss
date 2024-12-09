@@ -1,5 +1,5 @@
 .sidebar-container {
-  width: 115px;
+  min-width: 115px;
   height: 100%;
   background: #f7f7f7;
   position: relative;
@@ -30,15 +30,15 @@
     }
     .active-background {
       position: absolute;
-      left: 14px;
+      left: 15px;
       width: 100px;
       height: 65px;
       border-radius: 12px 0px 0px 12px;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+      border-left: 1px solid #f0f0f0;
       background: #fff;
-      transition: top 0.2s cubic-bezier(0.71, 0.01, 0.38, 1);
+      transition: top 0.1s cubic-bezier(0.71, 0.01, 0.38, 1);
     }
   }
 }

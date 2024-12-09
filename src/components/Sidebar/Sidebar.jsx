@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Sidebar.scss";
 import AppLogo from "../AppLogo/AppLogo";
-import SidebarItems from "../../utils/constants";
+import { SidebarItems } from "../../utils/constants";
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState(0);
@@ -20,7 +20,7 @@ const Sidebar = () => {
         />
         {SidebarItems.map((item, index) => (
           <div
-            key={index}
+            key={item.name}
             className={`sidebar-container-list-item ${
               activeItem === index ? "active" : ""
             }`}

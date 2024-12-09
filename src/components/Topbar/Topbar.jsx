@@ -6,7 +6,8 @@ const Topbar = () => {
   return (
     <div className="topbar-container">
       <div className="topbar-container-date">
-        {formatDate().date} {formatDate().month},{" "}
+        {formatDate().date} {formatDate().month}
+        <br />
         <span>{formatDate().day}</span>
       </div>
     </div>

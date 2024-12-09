@@ -1,16 +1,22 @@
 .topbar-container {
-  height: 65px;
+  height: 100px;
   position: fixed;
   top: 0;
   left: 115px;
   padding: 24px 32px;
-
+  width: calc(100% - 395px);
+  text-align: left;
   &-date {
     color: #000;
     font-family: Inter;
     font-size: 24px;
-    font-weight: 700;
+    font-style: normal;
+    font-weight: 400;
     span {
+      display: block;
+      margin-top: 0;
+      color: #a1a1a1;
+      font-size: 16px;
       font-weight: 500;
     }
   }

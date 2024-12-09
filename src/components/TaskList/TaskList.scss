@@ -1,0 +1,11 @@
+.task-list-container {
+  margin-top: 40px;
+  height: calc(100vh - 242px);
+  overflow-y: auto;
+  &-divider {
+    height: 1px;
+    width: calc(100% - 48px);
+    background: #ececec;
+    margin-left: 24px;
+  }
+}

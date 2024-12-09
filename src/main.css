@@ -25,3 +25,37 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 50%;
 }
+
+input[type="text"] {
+  border: none;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border: none;
+  outline: none;
+}
+
+input[type="text"]::placeholder {
+  color: #ccc;
+}
+
+input[type="text"]::-webkit-input-placeholder {
+  color: #ccc;
+}
+
+input[type="text"]::-moz-placeholder {
+  color: #ccc;
+}
+
+*:hover::-webkit-scrollbar,
+*:active::-webkit-scrollbar,
+*:focus::-webkit-scrollbar {
+  display: block;
+  width: 3px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #989898;
+  border-radius: 10px;
+}
