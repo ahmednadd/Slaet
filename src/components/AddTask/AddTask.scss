@@ -15,7 +15,7 @@
     background: #fafafa;
     color: #000;
     font-family: Inter;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 400;
     position: relative;
     z-index: 1;
@@ -79,6 +79,11 @@
           display: flex;
           gap: 12px;
           align-items: center;
+          .start-time {
+            position: relative;
+            cursor: pointer;
+            text-transform: uppercase;
+          }
           .total-time {
             color: rgba(40, 40, 40, 0.7);
           }

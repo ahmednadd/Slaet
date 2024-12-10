@@ -6,7 +6,6 @@ import { TodoContext } from "../../context/TodoContext";
 const TaskList = () => {
   const { state } = useContext(TodoContext);
   const { currentCalendarTasks } = state;
-  // console.log(state, "currentCalendarTasks");
   return (
     <div className="task-list-container">
       {currentCalendarTasks.map((item, index) => (

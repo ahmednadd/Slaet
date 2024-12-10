@@ -3,8 +3,6 @@ import "./TaskListItem.scss";
 import { formatTimestamp } from "../../../utils/functions";
 
 const TaskListItem = ({ item }) => {
-  const time = formatTimestamp(item.createdTime);
-
   return (
     <div className="task-list-item-container">
       <div className="task-list-item-container-check">
@@ -13,7 +11,8 @@ const TaskListItem = ({ item }) => {
       <div className="task-list-item-container-desc">
         <div className="task-list-item-container-desc-title">{item.title}</div>
         <div className="task-list-item-container-desc-date">
-          {time.timeFormatted}
+          {formatTimestamp(item.createdTime).timeFormatted} -{" "}
+          {formatTimestamp(item.endTime).timeFormatted}
         </div>
       </div>
     </div>

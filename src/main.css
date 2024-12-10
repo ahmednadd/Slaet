@@ -59,3 +59,18 @@ input[type="text"]::-moz-placeholder {
   background: #989898;
   border-radius: 10px;
 }
+
+/* selection  styles on hover  */
+.selection {
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  position: relative;
+}
+.selection:hover {
+  background-color: #eeeded;
+}
+.selection-active {
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.08) inset;
+  background-color: #f5f5f5;
+}

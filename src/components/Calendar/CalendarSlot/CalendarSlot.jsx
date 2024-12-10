@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./CalendarSlot.scss";
-const CalendarSlot = ({ event }) => {
-  console.log(event, "event");
+import { formatTimestamp } from "../../../utils/functions";
+import { TodoContext } from "../../../context/TodoContext";
+const CalendarSlot = ({ event, style, scrollItem, index }) => {
+  const { state } = useContext(TodoContext);
+  const { taskSlotDuration } = state;
+  let dynamicClassName = "";
+
+  useEffect(() => {
+    if (taskSlotDuration) {
+      
+    }
+  }, [taskSlotDuration]);
+
   return (
-    <div className="calendar-slot-container">
-      <div className="calendar-slot-container-desc">
-        Read one chapter of Meditations
+    <div
+      ref={index === 0 ? scrollItem : null}
+      className="calendar-slot-container"
+      style={style}
+    >
+      <div className="calendar-slot-container-desc">{event.title}</div>
+      <div className="calendar-slot-container-time">
+        {formatTimestamp(event.createdTime).timeFormatted} -{" "}
+        {formatTimestamp(event.endTime).timeFormatted}
       </div>
-      <div className="calendar-slot-container-time">7:00 AM - 8:30 AM</div>
     </div>
   );
 };

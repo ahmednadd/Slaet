@@ -52,4 +52,25 @@ function formatTimestamp(isoTimestamp) {
   return { timeFormatted, dateFormatted };
 }
 
-export { formatDate, formatTimestamp };
+const formatDuration = (duration) => {
+  // Convert milliseconds to minutes
+  const totalMinutes = Math.floor(duration / (1000 * 60));
+
+  // Round down to the nearest 15 minutes
+  const roundedMinutes = Math.floor(totalMinutes / 15) * 15;
+
+  const hours = Math.floor(roundedMinutes / 60);
+  const minutes = roundedMinutes % 60;
+
+  let result = "";
+  if (hours > 0) {
+    result += `${hours} hour${hours > 1 ? "s" : ""}`;
+  }
+  if (minutes > 0) {
+    result += (result ? " " : "") + `${minutes} min${minutes > 1 ? "s" : ""}`;
+  }
+
+  return result || "0 mins"; // Return '0 mins' if duration is 0
+};
+
+export { formatDate, formatTimestamp, formatDuration };
