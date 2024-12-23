@@ -11,7 +11,9 @@ const AppLayout = () => {
       <Sidebar />
       <Topbar />
       <Playground />
-      <Calendar />
+      <div className="right-side">
+        <Calendar />
+      </div>
     </div>
   );
 };

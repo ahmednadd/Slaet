@@ -1,6 +1,7 @@
 import React from "react";
 import "./TaskListItem.scss";
 import { formatTimestamp } from "../../../utils/functions";
+import { Icons } from "../../../utils/icons";
 
 const TaskListItem = ({ item }) => {
   return (
@@ -14,6 +15,9 @@ const TaskListItem = ({ item }) => {
           {formatTimestamp(item.createdTime).timeFormatted} -{" "}
           {formatTimestamp(item.endTime).timeFormatted}
         </div>
+      </div>
+      <div className="task-list-item-container-options">
+        <Icons.calendar />
       </div>
     </div>
   );

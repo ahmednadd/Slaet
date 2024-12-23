@@ -1,9 +1,17 @@
 .task-list-item-container {
   display: flex;
   align-items: center;
-  padding: 12px 24px;
+  padding: 12px 0;
   gap: 16px;
-
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  padding-right: 24px;
+  &:hover {
+    background: #fafafa;
+    border-radius: 14px;
+    border-bottom: 1px solid #ececec;
+  }
   &-check {
     input[type="checkbox"] {
       -webkit-appearance: none;
@@ -37,5 +45,8 @@
       font-size: 12px;
       font-weight: 400;
     }
+  }
+  &-options {
+    margin-left: auto; // Added to push the third child to the right
   }
 }

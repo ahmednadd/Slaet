@@ -9,6 +9,7 @@ export function TodoContextProvider({ children }) {
     taskSlotDuration: 60 * 60 * 1000,
     currentStartTime: "",
     currentEndTime: "",
+    selectedTask: null,
   });
 
   const value = {

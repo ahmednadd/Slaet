@@ -4,3 +4,14 @@
   position: relative;
   display: flex;
 }
+
+.right-side {
+  min-width: 370px;
+  background-color: #fff;
+  height: 100%;
+  padding-top: 24px;
+  padding-right: 24px;
+  overflow-y: auto;
+  border-left: 1px solid #ececec;
+  position: relative;
+}

@@ -14,11 +14,11 @@ const Calendar = () => {
 
   useEffect(() => {
     if (scrollItem.current) {
-      // Scroll the container to the first slot
+      // Scroll the container to the current time
       setTimeout(() => {
         scrollItem.current.scrollIntoView({
           behavior: "smooth",
-          block: "start",
+          block: "end",
         });
       }, 200);
     }
@@ -43,6 +43,12 @@ const Calendar = () => {
     return date.getHours() * 60 + date.getMinutes();
   };
 
+  const currentTimeStyle = {
+    top: `${
+      ((timeToMinutes(new Date()) - timeToMinutes(startOfDay)) / 30) * 25 + 24
+    }px`, // Calculate position
+  };
+
   // Calculate the top position and height of an event
   const calculateEventStyle = (event, startOfDay) => {
     const startMinutes =
@@ -57,6 +63,11 @@ const Calendar = () => {
 
   return (
     <div className="calendar-container">
+      <div
+        className="calendar-container-current-time"
+        style={currentTimeStyle}
+        ref={scrollItem}
+      />
       <div className="timeline">
         {timeSlots.map((slot, index) => (
           <div
@@ -78,18 +89,10 @@ const Calendar = () => {
         ))}
       </div>
 
-      {currentCalendarTasks.map((event, index) => {
+      {currentCalendarTasks.map((event) => {
         const style = calculateEventStyle(event, startOfDay);
 
-        return (
-          <CalendarSlot
-            key={event.id}
-            event={event}
-            style={style}
-            scrollItem={scrollItem}
-            index={index}
-          />
-        );
+        return <CalendarSlot key={event.id} event={event} style={style} />;
       })}
     </div>
   );

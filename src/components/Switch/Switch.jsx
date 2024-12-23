@@ -1,22 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Switch.scss";
-
-const Switch = () => {
-  const [isToggled, setIsToggled] = useState(false);
-
-  const handleToggle = () => {
-    setIsToggled(!isToggled);
-  };
-
+const Switch = ({ checked, onChange }) => {
+  console.log(checked);
   return (
-    <div className="switch-container" onClick={handleToggle}>
-      <div
-        className={`switch-container-toggle ${isToggled ? "toggled" : ""}`}
+    <div className="toggleWrapper">
+      <input
+        type="checkbox"
+        name="toggle1"
+        className="mobileToggle"
+        checked={checked} // {{ edit_1 }}
+        onChange={onChange} // {{ edit_2 }}
       />
-      <div className="switch-container-text">
-        <span>To-Do</span>
-        <span>Notes</span>
-      </div>
+      <label htmlFor="toggle1"></label>
     </div>
   );
 };
