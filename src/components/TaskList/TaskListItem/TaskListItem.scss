@@ -1,3 +1,8 @@
+.task-list-item-container.active {
+  background: #fafafa;
+  border-radius: 14px;
+  border-bottom: 1px solid #ececec;
+}
 .task-list-item-container {
   display: flex;
   align-items: center;
@@ -7,11 +12,13 @@
   border-bottom: 1px solid transparent;
   transition: all 0.2s ease;
   padding-right: 24px;
+
   &:hover {
     background: #fafafa;
     border-radius: 14px;
     border-bottom: 1px solid #ececec;
   }
+
   &-check {
     input[type="checkbox"] {
       -webkit-appearance: none;

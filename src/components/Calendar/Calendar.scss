@@ -1,11 +1,20 @@
 .calendar-container {
   width: 100%;
+  max-width: 370px;
+  min-width: 370px;
+  background-color: #fff;
   height: 100%;
+  padding-top: 24px;
+  padding-right: 24px;
+  overflow-y: auto;
+  border-left: 1px solid #ececec;
+  position: relative;
+  animation: slideInRight 0.2s ease forwards; /* Trigger the animation */
 
   &-current-time {
     position: absolute;
     left: 25px;
-    z-index: 99;
+    z-index: 9999;
     width: calc(100% - 25px);
     height: 2px;
     background-color: #2b6eff;

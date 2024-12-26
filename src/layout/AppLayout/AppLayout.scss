@@ -3,15 +3,16 @@
   background-color: #fff;
   position: relative;
   display: flex;
+  overflow-x: hidden;
 }
 
-.right-side {
-  min-width: 370px;
-  background-color: #fff;
-  height: 100%;
-  padding-top: 24px;
-  padding-right: 24px;
-  overflow-y: auto;
-  border-left: 1px solid #ececec;
-  position: relative;
+@keyframes slideInRight {
+  from {
+    transform: translateX(20%); /* Start off-screen to the right */
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0); /* Slide into place */
+    opacity: 1;
+  }
 }

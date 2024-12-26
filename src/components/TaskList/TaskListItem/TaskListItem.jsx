@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./TaskListItem.scss";
 import { formatTimestamp } from "../../../utils/functions";
 import { Icons } from "../../../utils/icons";
+import { TodoContext } from "../../../context/TodoContext";
 
 const TaskListItem = ({ item }) => {
+  const { state, setState } = useContext(TodoContext);
+
+  const onSelectTask = () => {
+    setState((prevState) => ({
+      ...prevState,
+      selectedTask: item,
+    }));
+  };
+
   return (
-    <div className="task-list-item-container">
+    <div
+      className={`task-list-item-container ${
+        state.selectedTask?.id === item.id ? "active" : ""
+      }`}
+      onClick={onSelectTask}
+    >
       <div className="task-list-item-container-check">
         <input type="checkbox" />
       </div>

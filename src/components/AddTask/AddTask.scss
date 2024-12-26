@@ -87,26 +87,6 @@
         }
       }
     }
-
-    &-time {
-      margin-left: 20px;
-      display: flex;
-      gap: 4px;
-      align-items: center;
-      color: #282828;
-      font-family: Inter;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      .start-time {
-        position: relative;
-        cursor: pointer;
-        text-transform: uppercase;
-      }
-      .total-time {
-        color: rgba(40, 40, 40, 0.7);
-      }
-    }
   }
 }
 

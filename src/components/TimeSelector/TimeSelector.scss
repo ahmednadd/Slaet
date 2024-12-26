@@ -1,0 +1,18 @@
+.time-selector-container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: #282828;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  .start-time {
+    position: relative;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .total-time {
+    color: #9a9a9a;
+  }
+}

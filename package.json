@@ -5,7 +5,9 @@
   "main": "background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --watch"
+    "start": "webpack --watch",
+    "lint": "eslint src/**/*.{js,jsx}",
+    "lint:fix": "eslint src/**/*.{js,jsx} --fix"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +21,12 @@
     "@babel/preset-env": "^7.25.9",
     "@babel/preset-react": "^7.25.9",
     "@svgr/webpack": "^8.1.0",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^9.2.1",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.3",
     "sass": "^1.81.0",
     "sass-loader": "^16.0.3",
     "style-loader": "^4.0.0",

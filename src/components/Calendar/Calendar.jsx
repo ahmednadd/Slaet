@@ -17,7 +17,6 @@ const Calendar = () => {
       // Scroll the container to the current time
       setTimeout(() => {
         scrollItem.current.scrollIntoView({
-          behavior: "smooth",
           block: "end",
         });
       }, 200);

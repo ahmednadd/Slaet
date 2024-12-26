@@ -1,17 +1,17 @@
+// webpack.config.js
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  //   entry: "./src/main.js", // Path to your React entry point
   entry: {
-    main: "./src/main.js",
+    main: "./src/main.js", // Ensure this file exists
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js", // Webpack will output this bundle
+    filename: "bundle.js",
   },
-  devtool: "source-map", // Use a safer source map method
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -26,11 +26,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          "style-loader", // Injects styles into DOM
-          "css-loader", // Translates CSS into CommonJS
-          "sass-loader", // Compiles Sass to CSS
-        ],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.svg$/,
@@ -41,13 +37,12 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: "assets", to: "assets" }, // as-is
-        { from: "popup", to: "popup" }, // as-is
-        { from: "manifest.json", to: "manifest.json" }, // as-is
-        { from: "background.js", to: "background.js" }, // as-is
-        { from: "src/main.html", to: "main.html" }, // as-is
-        { from: "src/main.css", to: "main.css" }, // as-is
-        // Add more patterns as needed
+        { from: "assets", to: "assets" },
+        { from: "popup", to: "popup" },
+        { from: "manifest.json", to: "manifest.json" },
+        { from: "background.js", to: "background.js" },
+        { from: "src/main.html", to: "main.html" },
+        { from: "src/main.css", to: "main.css" },
       ],
     }),
   ],

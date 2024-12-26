@@ -1,16 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./AddTask.scss";
 import { Icons } from "../../utils/icons";
 import { TodoContext } from "../../context/TodoContext";
 import { saveTasks } from "../../services/localStorageManager";
-import {
-  formatDate,
-  formatDuration,
-  formatTimestamp,
-} from "../../utils/functions";
-import TimeDropdown from "../TimeDropdown/TimeDropdown";
-import useClickAway from "../../hooks/useClickAway";
 import Switch from "../Switch/Switch";
+import TimeSelector from "../TimeSelector/TimeSelector";
 
 const AddTask = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -23,23 +17,12 @@ const AddTask = () => {
     currentEndTime,
   } = state;
   // set default task duration to 1
-  // 1 means 1 hour, 2 means 2 hours, 0.5 means 30 minutes, 0.25 means 15 minutes
-  const [taskDuration, setTaskDuration] = useState(1);
-  const [isStartTime, setIsStartTime] = useState(false);
-  const [isEndTime, setIsEndTime] = useState(false);
+
   const [isChecked, setIsChecked] = useState(false);
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
   };
-
-  const startTimeRef = useClickAway(() => {
-    setIsStartTime(false);
-  });
-
-  const endTimeRef = useClickAway(() => {
-    setIsEndTime(false);
-  });
 
   const handleInputFocus = () => {
     setIsInputFocused(true);
@@ -69,11 +52,6 @@ const AddTask = () => {
       saveTasks(tasks);
       setInputValue("");
     }
-  };
-
-  const hideDropDowns = () => {
-    setIsStartTime(false);
-    setIsEndTime(false);
   };
 
   return (
@@ -109,99 +87,9 @@ const AddTask = () => {
               : "none",
         }}
       />
-
       {inputValue?.length > 0 && (
         <div className="add-task-container-details">
           <div className="divider-top" />
-          {/* <div className="add-task-container-details-left">
-            <div className="add-task-container-details-left-items time">
-              <Icons.timeLine className="icon" />
-              <div className="content">All Day</div>
-            </div>
-            <div className="add-task-container-details-left-items custom">
-              <div className="content">
-                <div
-                  className={`start-time selection ${
-                    isStartTime && "selection-active"
-                  }`}
-                  onClick={() => setIsStartTime(true)}
-                >
-                  {currentStartTime
-                    ? formatTimestamp(currentStartTime).timeFormatted
-                    : new Date().toLocaleTimeString([], {
-                        hour: "numeric",
-                        minute: "2-digit",
-                        hour12: true,
-                      })}
-
-                  {isStartTime && (
-                    <div ref={startTimeRef}>
-                      <TimeDropdown
-                        startTime={true}
-                        hideDropDowns={hideDropDowns}
-                      />
-                    </div>
-                  )}
-                </div>
-                <span>&#10132;</span>
-                <div
-                  className={`end-time selection ${
-                    isEndTime && "selection-active"
-                  }`}
-                  onClick={() => setIsEndTime(true)}
-                >
-                  {currentEndTime
-                    ? formatTimestamp(currentEndTime).timeFormatted
-                    : new Date(
-                        new Date().getTime() + 60 * 60 * 1000
-                      ).toLocaleTimeString([], {
-                        hour: "numeric",
-                        minute: "2-digit",
-                        hour12: true,
-                      })}
-                  {isEndTime && (
-                    <div ref={endTimeRef}>
-                      <TimeDropdown
-                        startTime={false}
-                        hideDropDowns={hideDropDowns}
-                      />
-                    </div>
-                  )}
-                </div>
-                <div className="total-time">
-                  {formatDuration(taskSlotDuration)}
-                </div>
-              </div>
-            </div>
-            <div className="add-task-container-details-left-items">
-              <Icons.calendar className="icon" />
-              <div className="content">
-                {formatDate().date} {formatDate().month}
-              </div>
-            </div>
-            <div className="add-task-container-details-left-items ">
-              <Icons.repeat className="icon" />
-              <div className="content">Everyday</div>
-            </div>
-          </div> */}
-          {/* <div className="add-task-container-details-right">
-            <div className="add-task-container-details-right-items">
-              <Icons.notification className="icon" />
-              <div
-                className="content"
-                style={{
-                  color: "rgba(40, 40, 40, 0.7)",
-                }}
-              >
-                Remind me:
-              </div>
-            </div>
-            <div className="add-task-container-details-right-items custom">
-              <div className="content">
-                <div className="">10 mins before</div>
-              </div>
-            </div>
-          </div> */}
           <div className="add-task-container-details-options">
             <div className="item">
               <div className="icon">
@@ -223,57 +111,7 @@ const AddTask = () => {
               </div>
             </div>
           </div>
-          <div className="add-task-container-details-time">
-            <div
-              className={`start-time selection ${
-                isStartTime && "selection-active"
-              }`}
-              onClick={() => setIsStartTime(true)}
-            >
-              {currentStartTime
-                ? formatTimestamp(currentStartTime).timeFormatted
-                : new Date().toLocaleTimeString([], {
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}
-
-              {isStartTime && (
-                <div ref={startTimeRef}>
-                  <TimeDropdown
-                    startTime={true}
-                    hideDropDowns={hideDropDowns}
-                  />
-                </div>
-              )}
-            </div>
-            <span>&#10132;</span>
-            <div
-              className={`end-time selection ${
-                isEndTime && "selection-active"
-              }`}
-              onClick={() => setIsEndTime(true)}
-            >
-              {currentEndTime
-                ? formatTimestamp(currentEndTime).timeFormatted
-                : new Date(
-                    new Date().getTime() + 60 * 60 * 1000
-                  ).toLocaleTimeString([], {
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}
-              {isEndTime && (
-                <div ref={endTimeRef}>
-                  <TimeDropdown
-                    startTime={false}
-                    hideDropDowns={hideDropDowns}
-                  />
-                </div>
-              )}
-            </div>
-            <div className="total-time">{formatDuration(taskSlotDuration)}</div>
-          </div>
+          <TimeSelector />
         </div>
       )}
     </div>
