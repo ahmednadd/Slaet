@@ -9,8 +9,10 @@ const Calendar = () => {
 
   const scrollItem = useRef(null);
 
-  const startOfDay = "2024-12-10T00:00:00"; // Start time
-  const endOfDay = "2024-12-10T24:00:00"; // End time
+  // Generate dynamic start and end times for today
+  const today = new Date();
+  const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0).toISOString();
+  const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59).toISOString();
 
   useEffect(() => {
     if (scrollItem.current) {

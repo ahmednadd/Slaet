@@ -73,4 +73,24 @@ const formatDuration = (duration) => {
   return result || "0 mins"; // Return '0 mins' if duration is 0
 };
 
-export { formatDate, formatTimestamp, formatDuration };
+// Round time up to the next 15-minute interval
+const roundToNext15Minutes = (date = new Date()) => {
+  const newDate = new Date(date);
+  const minutes = newDate.getMinutes();
+  const remainder = minutes % 15;
+  
+  if (remainder === 0 && newDate.getSeconds() === 0 && newDate.getMilliseconds() === 0) {
+    // If it's exactly on a 15-minute mark, move to next 15-minute interval
+    newDate.setMinutes(minutes + 15);
+  } else {
+    // Round up to next 15-minute mark
+    newDate.setMinutes(minutes + (15 - remainder));
+  }
+  
+  newDate.setSeconds(0);
+  newDate.setMilliseconds(0);
+  
+  return newDate;
+};
+
+export { formatDate, formatTimestamp, formatDuration, roundToNext15Minutes };

@@ -14,10 +14,33 @@
       "128": "assets/icon128.jpg"
     }
   },
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": [
+    "storage", 
+    "activeTab", 
+    "scripting", 
+    "notifications", 
+    "alarms",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "icons": {
     "16": "assets/icon16.jpg",
     "48": "assets/icon48.jpg",

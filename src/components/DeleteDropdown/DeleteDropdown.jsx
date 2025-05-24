@@ -12,12 +12,22 @@ const DeleteDropdown = () => {
     const tasks = state.currentCalendarTasks.filter(
       (task) => task.id !== selectedTaskId
     );
+    
     setState((prevState) => ({
       ...prevState,
       currentCalendarTasks: tasks,
       selectedTask: null,
     }));
+    
     saveTasks(tasks);
+    
+    // Cancel notification for deleted task
+    if (chrome?.runtime?.sendMessage) {
+      chrome.runtime.sendMessage({
+        type: "CANCEL_NOTIFICATION",
+        taskId: selectedTaskId
+      });
+    }
   };
 
   return (

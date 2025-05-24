@@ -2,10 +2,10 @@ import React, { useContext, useRef, useState } from "react";
 import "./TimeSelector.scss";
 import TimeDropdown from "../TimeDropdown/TimeDropdown";
 import { TodoContext } from "../../context/TodoContext";
-import { formatDuration, formatTimestamp } from "../../utils/functions";
+import { formatDuration, formatTimestamp, roundToNext15Minutes } from "../../utils/functions";
 import useClickAway from "../../hooks/useClickAway";
 
-const TimeSelector = () => {
+const TimeSelector = ({ isDisabled = false }) => {
   const { state, setState } = useContext(TodoContext);
   const [isStartTime, setIsStartTime] = useState(false);
   const [isEndTime, setIsEndTime] = useState(false);
@@ -31,33 +31,33 @@ const TimeSelector = () => {
   };
 
   return (
-    <div className="time-selector-container">
+    <div className={`time-selector-container ${isDisabled ? "disabled" : ""}`}>
       <div
-        className={`start-time selection ${isStartTime && "selection-active"}`}
-        onClick={() => setIsStartTime(true)}
+        className={`start-time selection ${isStartTime && "selection-active"} ${isDisabled ? "disabled" : ""}`}
+        onClick={() => !isDisabled && setIsStartTime(true)}
       >
-        {currentStartTime
+        {isDisabled ? "All Day" : currentStartTime
           ? formatTimestamp(currentStartTime).timeFormatted
-          : new Date().toLocaleTimeString([], {
+          : roundToNext15Minutes().toLocaleTimeString([], {
               hour: "numeric",
               minute: "2-digit",
               hour12: true,
             })}
 
-        {isStartTime && (
+        {isStartTime && !isDisabled && (
           <div ref={startTimeRef}>
             <TimeDropdown startTime={true} hideDropDowns={hideDropDowns} />
           </div>
         )}
       </div>
-      <span>&#10132;</span>
+      <span className={`arrow ${isDisabled ? "disabled" : ""}`}>&#10132;</span>
       <div
-        className={`end-time selection ${isEndTime && "selection-active"}`}
-        onClick={() => setIsEndTime(true)}
+        className={`end-time selection ${isEndTime && "selection-active"} ${isDisabled ? "disabled" : ""}`}
+        onClick={() => !isDisabled && setIsEndTime(true)}
       >
-        {currentEndTime
+        {isDisabled ? "" : currentEndTime
           ? formatTimestamp(currentEndTime).timeFormatted
-          : new Date(new Date().getTime() + 60 * 60 * 1000).toLocaleTimeString(
+          : new Date(roundToNext15Minutes().getTime() + taskSlotDuration).toLocaleTimeString(
               [],
               {
                 hour: "numeric",
@@ -65,13 +65,15 @@ const TimeSelector = () => {
                 hour12: true,
               }
             )}
-        {isEndTime && (
+        {isEndTime && !isDisabled && (
           <div ref={endTimeRef}>
             <TimeDropdown startTime={false} hideDropDowns={hideDropDowns} />
           </div>
         )}
       </div>
-      <div className="total-time">{formatDuration(taskSlotDuration)}</div>
+      <div className={`total-time ${isDisabled ? "disabled" : ""}`}>
+        {isDisabled ? "All Day" : formatDuration(taskSlotDuration)}
+      </div>
     </div>
   );
 };

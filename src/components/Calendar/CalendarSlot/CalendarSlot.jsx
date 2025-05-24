@@ -13,11 +13,18 @@ const CalendarSlot = ({ event, style }) => {
   }, [taskSlotDuration]);
 
   return (
-    <div className="calendar-slot-container" style={style}>
-      <div className="calendar-slot-container-desc">{event.title}</div>
+    <div 
+      className={`calendar-slot-container ${event.isCompleted ? "completed" : ""} ${event.isAllDay ? "all-day" : ""}`} 
+      style={style}
+    >
+      <div className={`calendar-slot-container-desc ${event.isCompleted ? "completed" : ""}`}>
+        {event.title}
+      </div>
       <div className="calendar-slot-container-time">
-        {formatTimestamp(event.createdTime).timeFormatted} -{" "}
-        {formatTimestamp(event.endTime).timeFormatted}
+        {event.isAllDay 
+          ? "All Day"
+          : `${formatTimestamp(event.createdTime).timeFormatted} - ${formatTimestamp(event.endTime).timeFormatted}`
+        }
       </div>
     </div>
   );

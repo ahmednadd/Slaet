@@ -7,12 +7,52 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
+  transition: all 0.2s ease;
+  
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
   .start-time {
     position: relative;
     cursor: pointer;
     text-transform: uppercase;
+    transition: all 0.2s ease;
+    
+    &.disabled {
+      cursor: not-allowed;
+      color: #9a9a9a;
+    }
   }
+  
+  .end-time {
+    position: relative;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    
+    &.disabled {
+      cursor: not-allowed;
+      color: #9a9a9a;
+    }
+  }
+  
+  .arrow {
+    transition: all 0.2s ease;
+    
+    &.disabled {
+      opacity: 0.4;
+    }
+  }
+  
   .total-time {
     color: #9a9a9a;
+    transition: all 0.2s ease;
+    
+    &.disabled {
+      color: #2563eb;
+      font-weight: 500;
+    }
   }
 }

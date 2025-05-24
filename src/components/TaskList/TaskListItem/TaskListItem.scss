@@ -19,6 +19,40 @@
     border-bottom: 1px solid #ececec;
   }
 
+  // Styles for completed tasks
+  &.completed {
+    opacity: 0.6;
+    
+    .task-list-item-container-desc-title {
+      text-decoration: line-through;
+      color: #888;
+    }
+    
+    .task-list-item-container-desc-date {
+      color: #bbb;
+    }
+  }
+
+  // Styles for all-day tasks
+  &.all-day {
+    border-left: 3px solid #ffeaa7;
+    
+    .task-list-item-container-desc-date {
+      color: #856404;
+      font-weight: 600;
+    }
+  }
+
+  // Combined styles for completed all-day tasks
+  &.completed.all-day {
+    border-left: 3px solid #ccc;
+    
+    .task-list-item-container-desc-date {
+      color: #999;
+      font-weight: 400;
+    }
+  }
+
   &-check {
     input[type="checkbox"] {
       -webkit-appearance: none;
@@ -28,9 +62,23 @@
       width: 20px;
       height: 20px;
       cursor: pointer;
+      position: relative;
+      
       &:checked {
         background-color: #2563eb;
         border-color: #2563eb;
+        
+        // Add checkmark
+        &::after {
+          content: '✓';
+          color: white;
+          font-size: 14px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          line-height: 1;
+        }
       }
     }
   }
@@ -45,12 +93,19 @@
       font-family: Inter;
       font-size: 18px;
       font-weight: 400;
+      transition: all 0.2s ease;
+      
+      &.completed {
+        text-decoration: line-through;
+        color: #888;
+      }
     }
     &-date {
       color: #9a9a9a;
       font-family: Inter;
       font-size: 12px;
       font-weight: 400;
+      transition: all 0.2s ease;
     }
   }
   &-options {

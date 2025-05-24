@@ -35,6 +35,14 @@ const TaskListItem = ({ item }) => {
     
     // Save to localStorage
     saveTasks(updatedTasks);
+    
+    // Cancel notification if task is being completed
+    if (!item.isCompleted && chrome?.runtime?.sendMessage) {
+      chrome.runtime.sendMessage({
+        type: "CANCEL_NOTIFICATION",
+        taskId: item.id
+      });
+    }
   };
 
   return (
@@ -69,4 +77,4 @@ const TaskListItem = ({ item }) => {
   );
 };
 
-export default TaskListItem;
+export default TaskListItem; 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./TimeDropdown.scss";
 import { TodoContext } from "../../context/TodoContext";
+import { roundToNext15Minutes } from "../../utils/functions";
 
 const TimeDropdown = ({ startTime, hideDropDowns }) => {
   const [timeOptions, setTimeOptions] = useState([]);
@@ -11,11 +12,12 @@ const TimeDropdown = ({ startTime, hideDropDowns }) => {
   useEffect(() => {
     const generateTimeOptions = () => {
       const options = [];
-      const currentTime = new Date();
+      let currentTime;
 
       // Set the current time based on currentStartTime if startTime is false
       if (!startTime && currentStartTime) {
         const startDate = new Date(currentStartTime);
+        currentTime = new Date();
         currentTime.setHours(
           startDate.getHours(),
           startDate.getMinutes(),
@@ -23,9 +25,8 @@ const TimeDropdown = ({ startTime, hideDropDowns }) => {
           0
         );
       } else {
-        currentTime.setSeconds(0);
-        currentTime.setMilliseconds(0);
-        currentTime.setMinutes(Math.ceil(currentTime.getMinutes() / 15) * 15); // Round up to the nearest 15 minutes
+        // Use rounded time for consistent 15-minute intervals
+        currentTime = roundToNext15Minutes();
       }
 
       for (let i = 0; i < 24 * 4; i++) {
@@ -43,7 +44,7 @@ const TimeDropdown = ({ startTime, hideDropDowns }) => {
     };
 
     generateTimeOptions();
-  }, [startTime, currentStartTime]); // Added dependencies
+  }, [startTime, currentStartTime]);
 
   // logic to disable previous times
   // useEffect(() => {
@@ -110,23 +111,28 @@ const TimeDropdown = ({ startTime, hideDropDowns }) => {
     const date = new Date();
     date.setHours(hours, minutes, 0, 0); // Set hours, minutes, seconds, and milliseconds
 
-    // Return the time as a local ISO string
-    return date.toLocaleString(); // Converts to local time zone string
+    // Return the time as ISO string for consistency
+    return date.toISOString();
   };
 
   const handleSelectTime = (time) => {
     if (startTime) {
+      const selectedTime = handleSelectedTime(time);
+      const selectedDate = new Date(selectedTime);
+      const endTime = new Date(selectedDate.getTime() + taskSlotDuration);
+      
       setState((prevState) => ({
         ...prevState,
-        currentStartTime: handleSelectedTime(time),
-        currentEndTime: handleSelectedTime(time),
+        currentStartTime: selectedTime,
+        currentEndTime: endTime.toISOString(),
       }));
     } else {
+      const selectedEndTime = handleSelectedTime(time);
       setState((prevState) => ({
         ...prevState,
-        currentEndTime: handleSelectedTime(time),
+        currentEndTime: selectedEndTime,
       }));
-      calculateDuration(handleSelectedTime(time));
+      calculateDuration(selectedEndTime);
     }
 
     hideDropDowns();
@@ -136,10 +142,22 @@ const TimeDropdown = ({ startTime, hideDropDowns }) => {
     if (currentStartTime && endTime) {
       const start = new Date(currentStartTime).getTime();
       const end = new Date(endTime).getTime();
-      setState((prevState) => ({
-        ...prevState,
-        taskSlotDuration: end - start,
-      }));
+      
+      // Ensure end time is after start time
+      if (end <= start) {
+        // If end time is not after start time, add 1 hour to start time
+        const adjustedEnd = start + 60 * 60 * 1000;
+        setState((prevState) => ({
+          ...prevState,
+          currentEndTime: new Date(adjustedEnd).toISOString(),
+          taskSlotDuration: 60 * 60 * 1000, // Default to 1 hour
+        }));
+      } else {
+        setState((prevState) => ({
+          ...prevState,
+          taskSlotDuration: end - start,
+        }));
+      }
     }
   };
 
